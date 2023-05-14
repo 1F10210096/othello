@@ -115,3 +115,30 @@
   height: 1em;
   margin-left: 0.5rem;
 }
+
+.board {
+  background:green;
+  height: 640px;
+  width: 640px;
+}
+
+.cell {
+  background:green;
+  height: 80px;
+  width: 80px;
+  border-style: solid;
+  float:left;
+
+}
+
+.stone{
+  background:white;
+  width: 60px;
+  height: 60px;
+  border-radius: 90%;
+  position: relative; /* 今の位置を基準 */
+  top: 7px; /* 上から10px */
+  left: 7px; /* 左から20px */
+
+
+}
