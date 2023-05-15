@@ -27,7 +27,7 @@ const Home = () => {
             newBoard[y_i][x_j] !== 0 &&
             newBoard[y_i][x_j] !== turnColor
           ) {
-            while (newBoard[y_i][x_j] !== turnColor) {
+            while (newBoard[y_i]?.[x_j] !== undefined && newBoard[y_i][x_j] !== turnColor) {
               if (newBoard[y_i]?.[x_j] !== undefined && newBoard[y_i][x_j] === 0) {
                 box.length = 0;
                 break;
@@ -37,15 +37,19 @@ const Home = () => {
               x_j += j;
               newBoard[y][x] = turnColor;
             }
-            box.forEach(([y_i, x_j]) => {
-              newBoard[y_i][x_j] = turnColor;
-            });
+            if (box.length > 0) { 
+              box.forEach(([y_i, x_j]) => {
+                newBoard[y_i][x_j] = turnColor;
+              });
+            }
+          }
+          if (box.length > 0) { 
+            setBoard(newBoard);
+            setTurnColor(2 / turnColor);
           }
         }
       }
     }
-    setBoard(newBoard);
-    setTurnColor(2 / turnColor);
   };
   return (
     <div className={styles.container}>
