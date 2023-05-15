@@ -16,11 +16,30 @@ const Home = () => {
   const onClick = (x: number, y: number) => {
     console.log(x, y);
     const newBoard: number[][] = JSON.parse(JSON.stringify(board));
-    if (board[y + 1] !== undefined && board[y + 1][x] !== 0 && board[y + 1][x] !== turnColor) {
+    if (newBoard[y][x] === 0) {
       newBoard[y][x] = turnColor;
+      const box = [];
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          let y_i = y + i;
+          let x_j = x + j;
+          if (
+            newBoard[y_i]?.[x_j] !== undefined &&
+            newBoard[y_i][x_j] !== 0 &&
+            newBoard[y_i][x_j] !== turnColor
+          ) {
+            box.push([y_i, x_j]);
+            y_i += i;
+            x_j += j;
+          }
+        }
+      }
+      box.forEach(([y_i, x_j]) => {
+        newBoard[y_i][x_j] = turnColor;
+      });
+      setBoard(newBoard);
       setTurnColor(2 / turnColor);
     }
-    setBoard(newBoard);
   };
   return (
     <div className={styles.container}>
