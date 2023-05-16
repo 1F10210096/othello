@@ -158,12 +158,6 @@
   left: 450px;
 }
 
-.text1{
-	position: relative; /* 今の位置を基準 */
-  top: 640px; /* 上から10px */
-  left: 450px;
-	font-size: 70px;
-	font-weight: bold;
-	color: #FFF;
-	-webkit-text-stroke: 2px #000;
+.available {
+  background-color: yellow;
 }
