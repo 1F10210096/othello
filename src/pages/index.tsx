@@ -3,6 +3,8 @@ import styles from './index.module.css';
 
 const Home = () => {
   const [turnColor, setTurnColor] = useState(1);
+  const [blackStoneCount, setBlackStoneCount] = useState(0);
+  const [whiteStoneCount, setWhiteStoneCount] = useState(0);
   const [board, setBoard] = useState([
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -111,40 +113,59 @@ const Home = () => {
       for (let n = 0; n < 8; n++) {
         y = m;
         x = n;
-        if (board[y][x] === 3) {
+        if (newBoard[y][x] === 3) {
           green_stone += 1;
-        } else if (board[y][x] === 1) {
+        } else if (newBoard[y][x] === 1) {
           black_stone += 1;
-        } else if (board[y][x] === 2) {
+        } else if (newBoard[y][x] === 2) {
           white_stone += 1;
         } else {
           continue;
         }
+        setBlackStoneCount(black_stone);
+        setWhiteStoneCount(white_stone);
       }
     }
-    console.log(green_stone)
-    console.log(white_stone)
-    console.log(black_stone)
+    console.log(green_stone);
+    console.log(white_stone);
+    console.log(black_stone);
     let text = '';
-    if (green_stone === 3) {
+    if (green_stone === 0) {
       if (black_stone < white_stone) {
-        text = '黒の勝ちです！';
-        console.log("a");
-      } else if (black_stone > white_stone) {
         text = '白の勝ちです！';
+        console.log('a');
+      } else if (black_stone > white_stone) {
+        text = '黒の勝ちです！';
         console.log(text);
       } else {
         text = '引き分け！';
         console.log(text);
       }
+      alert(`白${white_stone}、黒${black_stone}で、${text}`);
     }
+    const currentTurnText = document.getElementById('current-turn');
+    if (turnColor === 1) {
+      currentTurnText.textContent = '白';
+    } else {
+      currentTurnText.textContent = '黒';
+    }
+    
+    
   };
-  
 
   return (
     <div className={styles.container}>
       <div className={styles.me} />
       <div className={styles.component} />
+      <p>
+        現在の手番は<span id="current-turn">黒</span>です
+      </p>
+      <p>
+        黒の駒数: <span id="countblack">{blackStoneCount}</span>
+      </p>
+      <p>
+        白の駒数: <span id="countwhite">{whiteStoneCount}</span>
+      </p>
 
       <div className={styles.board}>
         {board.map((row, y) =>
